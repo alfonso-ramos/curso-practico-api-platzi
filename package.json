@@ -1,0 +1,19 @@
+{
+  "name": "curso-practico-api-platzi",
+  "version": "1.0.0",
+  "description": "Curso Practico de Consumo de API REST con JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfonso-ramos/curso-practico-api-platzi.git"
+  },
+  "author": "Alfonso Ramos <alfonsoramos.1803@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfonso-ramos/curso-practico-api-platzi/issues"
+  },
+  "homepage": "https://github.com/alfonso-ramos/curso-practico-api-platzi#readme"
+}
