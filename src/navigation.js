@@ -34,14 +34,14 @@ function homePage(){
   headerSection.style.background = '';
   arrowBtn.classList.add('inactive');
   arrowBtn.classList.remove('header-arrow--white');
-  headerCategoryTitle.classList.remove('inactive');
-  headerTitle.classList.add('inactive');
+  headerCategoryTitle.classList.add('inactive');
+  headerTitle.classList.remove('inactive');
   searchForm.classList.remove('inactive')
 
-  trendingPreviewSection.classList.remove('incative');
-  categoriesPreviewSection.classList.remove('incative');
-  genericSection.classList.add('incative')
-  movieDetailSection.classList.add('incative')
+  trendingPreviewSection.classList.remove('inactive');
+  categoriesPreviewSection.classList.remove('inactive');
+  genericSection.classList.add('inactive')
+  movieDetailSection.classList.add('inactive')
 
   getTrendingMoviesPreview();
   getCategoriesPreview();
@@ -49,22 +49,31 @@ function homePage(){
 
 
 function categoriesPage(){
+  console.log('Categories')
 
   headerSection.classList.remove("header-contaainer--long")
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
   arrowBtn.classList.remove('header-arrow--white');
-  headerCategoryTitle.classList.add('inactive');
-  headerTitle.classList.remove('inactive');
+  headerCategoryTitle.classList.remove('inactive');
+  headerTitle.classList.add('inactive');
   searchForm.classList.add('inactive')
 
-  trendingPreviewSection.classList.add('incative');
-  categoriesPreviesSection.classList.add('incative');
-  genericSection.classList.remove('incative')
-  moviesDetailSection.classList.add('incative')
+  trendingPreviewSection.classList.add('inactive');
+  categoriesPreviewSection.classList.add('inactive');
+  genericSection.classList.remove('inactive')
+  movieDetailSection.classList.add('inactive')
 
-  console.log('Categories')
+  const [page, categoryInfo] = location.hash.split('=');
+  const [categoryId, categoryName] = categoryInfo.split('-');
+
+  headerCategoryTitle.innerHTML = categoryName
+
+  getMoviesByCategory(categoryId)
+
 }
+
+
 function moviesPage(){
 
   headerSection.classList.add("header-contaainer--long")
@@ -75,10 +84,10 @@ function moviesPage(){
   headerTitle.classList.add('inactive');
   searchForm.classList.add('inactive')
 
-  trendingPreviewSection.classList.add('incative');
-  categoriesPreviesSection.classList.add('incative');
-  genericSection.classList.add('incative')
-  moviesDetailSection.classList.remove('incative')
+  trendingPreviewSection.classList.add('inactive');
+  categoriesPreviesSection.classList.add('inactive');
+  genericSection.classList.add('inactive')
+  moviesDetailSection.classList.remove('inactive')
 
   console.log('Movies')
 }
@@ -88,14 +97,14 @@ function searchPage(){
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
   arrowBtn.classList.remove('header-arrow--white');
-  headerCategoryTitle.classList.remove('inactive');
-  headerTitle.classList.add('inactive');
+  headerCategoryTitle.classList.add('inactive');
+  headerTitle.classList.remove('inactive');
   searchForm.classList.remove('inactive')
 
-  trendingPreviewSection.classList.add('incative');
-  categoriesPreviewSection.classList.add('incative');
-  genericSection.classList.remove('incative')
-  movieDetailSection.classList.add('incative')
+  trendingPreviewSection.classList.add('inactive');
+  categoriesPreviewSection.classList.add('inactive');
+  genericSection.classList.remove('inactive')
+  movieDetailSection.classList.add('inactive')
   console.log('Search')
 }
 function trendsPage(){
@@ -108,10 +117,10 @@ function trendsPage(){
   headerTitle.classList.remove('inactive');
   searchForm.classList.add('inactive')
 
-  trendingPreviewSection.classList.add('incative');
-  categoriesPreviewSection.classList.add('incative');
-  genericSection.classList.remove('incative')
-  movieDetailSection.classList.add('incative')
+  trendingPreviewSection.classList.add('inactive');
+  categoriesPreviewSection.classList.add('inactive');
+  genericSection.classList.remove('inactive')
+  movieDetailSection.classList.add('inactive')
 
   console.log('TRENDS')
 }
