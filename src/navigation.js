@@ -10,6 +10,8 @@ arrowBtn.addEventListener("click", () => {
 window.addEventListener('DOMContentLoaded', navigator, false)
 window.addEventListener('hashchange', navigator, false)
 
+window.scrollTo({top:0})
+
 function navigator(){
   console.log({location})
 
@@ -47,7 +49,6 @@ function homePage(){
   getCategoriesPreview();
 }
 
-
 function categoriesPage(){
   console.log('Categories')
 
@@ -66,13 +67,11 @@ function categoriesPage(){
 
   const [page, categoryInfo] = location.hash.split('=');
   const [categoryId, categoryName] = categoryInfo.split('-');
-
-  headerCategoryTitle.innerHTML = categoryName
+  const newName = decodeURI(categoryName)
+  headerCategoryTitle.innerHTML = newName
 
   getMoviesByCategory(categoryId)
-
 }
-
 
 function moviesPage(){
 
@@ -91,6 +90,7 @@ function moviesPage(){
 
   console.log('Movies')
 }
+
 function searchPage(){
 
   headerSection.classList.remove("header-contaainer--long")
@@ -107,6 +107,7 @@ function searchPage(){
   movieDetailSection.classList.add('inactive')
   console.log('Search')
 }
+
 function trendsPage(){
 
   headerSection.classList.remove("header-contaainer--long")
