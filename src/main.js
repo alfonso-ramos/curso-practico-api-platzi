@@ -8,6 +8,7 @@ const api = axios.create({
   },
 });
 
+//Crea un contenedor mostrando una lista de peliculas
 function createMovies(movies, container){
   container.innerHTML = ''
 
@@ -28,6 +29,7 @@ function createMovies(movies, container){
   })
 }
 
+// Crea un contenedor en el cual se muestra una lista de categorias que separan a nuestras peliculas
 function createCategories(categories, container){
   container.innerHTML = ''
 
@@ -50,6 +52,7 @@ function createCategories(categories, container){
   });
 }
 
+//Muestra un preview de peliculas que estan en tendencia
 async function getTrendingMoviesPreview() {
   const { data } = await api("/trending/movie/day");
   const movies = data.results;
@@ -60,6 +63,7 @@ async function getTrendingMoviesPreview() {
   
 }
 
+// Muestra la lista de categorias
 async function getCategoriesPreview() {
   const { data } = await api("/genre/movie/list");
 
@@ -68,10 +72,24 @@ async function getCategoriesPreview() {
   createCategories(categories, categoriesPreviewList)
 }
 
+//Muestra las peliculas separadas por categorias
 async function getMoviesByCategory(id){
   const { data } = await api("discover/movie", {
     params: {
       with_genres: id
+    }
+  });
+  const movies = data.results;
+
+  genericSection.innerHTML = "";
+
+  createMovies(movies, genericSection)
+}
+
+async function getMoviesBySearch(query){
+  const { data } = await api("search/movie", {
+    params: {
+      query: query
     }
   });
   const movies = data.results;
