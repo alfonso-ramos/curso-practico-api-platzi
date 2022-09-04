@@ -9,7 +9,17 @@ const api = axios.create({
 });
 
 //Crea un contenedor mostrando una lista de peliculas
-function createMovies(movies, container){
+
+const lazyLoader = new IntersectionObserver((entries) => {
+  entries.forEach( entry => {
+    if (entry.isIntersecting) {
+      const url = entry.target.getAttribute('data-image')
+      entry.target.setAttribute('src', url)
+    }
+  })
+})
+
+function createMovies(movies, container, lazyLoad = false){
   container.innerHTML = ''
 
   movies.forEach(movie =>{
@@ -23,9 +33,13 @@ function createMovies(movies, container){
     movieImg.classList.add("movie-img");
     movieImg.setAttribute("alt", movie.title);
     movieImg.setAttribute(
-      "src",
+      lazyLoad ? "data-image" : "src",
       "https://image.tmdb.org/t/p/w300" + movie.poster_path
     );
+
+    if(lazyLoad){
+      lazyLoader.observe(movieImg)
+    }
 
     movieContainer.appendChild(movieImg);
     container.appendChild(movieContainer);
@@ -55,6 +69,8 @@ function createCategories(categories, container){
   });
 }
 
+// Llamados a la API
+
 //Muestra un preview de peliculas que estan en tendencia
 async function getTrendingMoviesPreview() {
   const { data } = await api("/trending/movie/day");
@@ -62,8 +78,7 @@ async function getTrendingMoviesPreview() {
 
   trendingMoviesPreviewList.innerHTML = ''
 
-  createMovies(movies, trendingMoviesPreviewList)
-  
+  createMovies(movies, trendingMoviesPreviewList, true)
 }
 
 // Muestra la lista de categorias
@@ -86,7 +101,7 @@ async function getMoviesByCategory(id){
 
   genericSection.innerHTML = "";
 
-  createMovies(movies, genericSection)
+  createMovies(movies, genericSection, true)
 }
 
 //Muestra las peliculas que el usuario ponga en el buscador
@@ -100,7 +115,7 @@ async function getMoviesBySearch(query){
 
   genericSection.innerHTML = "";
 
-  createMovies(movies, genericSection)
+  createMovies(movies, genericSection, true)
 }
 
 async function getTrendingMovies() {
@@ -109,7 +124,7 @@ async function getTrendingMovies() {
 
   genericSection.innerHTML = ''
 
-  createMovies(movies, genericSection)
+  createMovies(movies, genericSection, true)
 }
 
 async function getMovieById(id) {
@@ -138,5 +153,5 @@ async function getRelatedMoviesById(id){
   const { data } = await api(`/movie/${id}/similar`);
 
   const relatedMovies = data.results
-  createMovies(relatedMovies, relatedMoviesContainer)
+  createMovies(relatedMovies, relatedMoviesContainer, true)
 }
